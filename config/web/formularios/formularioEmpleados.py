@@ -18,34 +18,40 @@ class FormularioEmpleados(forms.Form):
     nombresEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={'class':'form-control mb-3'}),
         required=True,
-        max_length=50
+        max_length=50,
+        label="Nombres"
     )
     
     apellidosEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={'class':'form-control mb-3'}),
         required=True,
-        max_length=50
+        max_length=50,
+        label="Apellidos"
     )
 
     fotoEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={'class':'form-control mb-3'}),
         required=True,
+        label="Foto"
     )
 
     cargo=forms.ChoiceField(
         widget=forms.Select(attrs={'class':'form-control mb-3'}),
         required=True,
-        choices=OPCIONES
+        choices=OPCIONES,
+        label="Cargo"
     )
     
     salario=forms.CharField(
         widget=forms.NumberInput(attrs={'class':'form-control mb-3'}),
         required=True,
+        label="Salario"
     )
     
     telefono=forms.CharField(
         widget=forms.NumberInput(attrs={'class':'form-control mb-3'}),
         required=True,
+        label="Número de contacto"
     )
     
     
