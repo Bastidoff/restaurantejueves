@@ -5,6 +5,9 @@ from django.shortcuts import render
 from web.formularios.formularioPlatos import FormularioPlatos
 from web.formularios.formularioEmpleados import FormularioEmpleados
 
+from web.models import Platos
+from web.models import Empleados
+
 # Create your views here.
 #las vistas en djangp son los CONTROLADORES
 
@@ -13,11 +16,12 @@ from web.formularios.formularioEmpleados import FormularioEmpleados
 def Home(request):
     return render(request,'index.html')
 
-def Platos(request):
+def VistaPlatos(request):
 
     formulario=FormularioPlatos()
     datosParaTemplate={
-        'formularioRegistro':formulario
+        'formularioRegistro':formulario,
+        'bandera':False
     }
 
     #preguntamos si existe alguna conexión de tipo POST
@@ -30,11 +34,29 @@ def Platos(request):
             #capturamos la información
             datosPlato=datosDelFormulario.cleaned_data
             print(datosPlato)
-        
+            #creamos un objeto de tipo MODELO PLATO
+            
+            platoNuevo=Platos(
+                nombre=datosPlato["nombrePlato"],
+                descripcion=datosPlato["descripcionPlato"],
+                foto=datosPlato["fotoPlato"],
+                precio=datosPlato["precioPlato"],
+                tipo=datosPlato["tipoPlato"]
+            )
+            #Intentamos llevar el objeto platoNuevo
+            try:
+                platoNuevo.save()
+                datosParaTemplate["bandera"]=True
+                print("Plato guardado con éxito.")
+            except Exception as error:
+                datosParaTemplate["bandera"]=False
+                print("error: ", error)
+
+
     return render(request,'platos.html',datosParaTemplate)
 
 
-def Empleados(request):
+def VistaEmpleados(request):
 
     formulario=FormularioEmpleados()
     datosParaTemplate={
@@ -44,6 +66,21 @@ def Empleados(request):
         datosDelFormulario=FormularioEmpleados(request.POST)
         if datosDelFormulario.is_valid():
             datosEmpleado=datosDelFormulario.cleaned_data
-            print(datosEmpleado)
+            empleadoNuevo=Empleados(
+                id = datosEmpleado["idEmpleado"],
+                nombres = datosEmpleado["nombresEmpleado"],
+                apellidos = datosEmpleado["apellidosEmpleado"],
+                foto = datosEmpleado["fotoEmpleado"],
+                cargo = datosEmpleado["cargo"],
+                salario = datosEmpleado["salario"],
+                telefono = datosEmpleado["telefono"]
+            )
+            try:
+                empleadoNuevo.save()
+                datosParaTemplate["bandera"]=True
+                print("Plato guardado con éxito.")
+            except Exception as error:
+                datosParaTemplate["bandera"]=False
+                print("error: ", error)
     return render(request,'empleados.html',datosParaTemplate)
 
