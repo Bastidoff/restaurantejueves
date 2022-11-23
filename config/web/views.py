@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.shortcuts import redirect
 
 
 #IMPORTAR EL FORMULARIO A RENDER
 from web.formularios.formularioPlatos import FormularioPlatos
 from web.formularios.formularioEmpleados import FormularioEmpleados
+from web.formularios.formularioEdicionPlatos import FormularioEdicionPlatos
 
 from web.models import Platos
 from web.models import Empleados
@@ -16,6 +18,34 @@ from web.models import Empleados
 def Home(request):
     return render(request,'index.html')
 
+def MenuPlatos(request):
+    platosConsultados=Platos.objects.all()
+    
+    formulario=FormularioEdicionPlatos()
+    
+    diccionarioEnvio={
+        'platos':platosConsultados,
+        'formulario':formulario
+    }
+    return render(request, 'menuPlatos.html',diccionarioEnvio)
+
+def EditarPlato(request,id):
+    if request.method == 'POST':
+        datosDelFormulario=FormularioEdicionPlatos(request.POST)
+        if datosDelFormulario.is_valid():
+            datosPlato=datosDelFormulario.cleaned_data
+            try:
+                Platos.objects.filter(pk=id).update(precio=datosPlato["precioPlato"])
+                print("ÉXITO GUARDANDO DATOS")
+            
+            except Exception as error:
+                print("error", error)
+            
+            
+            
+    return redirect('menu')
+            
+            
 def VistaPlatos(request):
 
     formulario=FormularioPlatos()
