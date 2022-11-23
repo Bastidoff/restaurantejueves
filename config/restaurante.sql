@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-11-2022 a las 16:35:39
+-- Tiempo de generación: 23-11-2022 a las 20:40:49
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -237,6 +237,13 @@ CREATE TABLE `empleados` (
   `telefono` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id`, `nombres`, `apellidos`, `foto`, `cargo`, `salario`, `telefono`) VALUES
+(1, 'María', 'Dueñas', 'https://firebasestorage.googleapis.com/v0/b/restaurantejueves.appspot.com/o/admin.jpg?alt=media&token=eb1a06f4-90b7-42d5-b29b-d264de533bb7', 4, 5000000, 30055555);
+
 -- --------------------------------------------------------
 
 --
@@ -251,6 +258,15 @@ CREATE TABLE `platos` (
   `precio` int(11) NOT NULL,
   `tipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `platos`
+--
+
+INSERT INTO `platos` (`id`, `nombre`, `descripcion`, `foto`, `precio`, `tipo`) VALUES
+(1, 'Primavera mundana', 'Vegetalescoloridos con proteína', 'https://firebasestorage.googleapis.com/v0/b/restaurantejueves.appspot.com/o/platos%2Fplato1.jpg?alt=media&token=1ed150fa-1e65-4ee6-a9a4-f75f6d701d95', 45000, 2),
+(2, 'Cañón a la montaña', 'Ca{on de cerdo marinado con chips de arracacha', 'https://firebasestorage.googleapis.com/v0/b/restaurantejueves.appspot.com/o/platos%2Fplato2.jpg?alt=media&token=60608cff-f122-41d2-8ab0-ac7693416af5', 80, 2),
+(3, 'Picadita variada', 'Lonjas de roast beef con aderezo y vegetales', 'https://firebasestorage.googleapis.com/v0/b/restaurantejueves.appspot.com/o/platos%2Fplato3.jpg?alt=media&token=a653089e-e142-4af7-a658-2835d82a11ee', 30000, 1);
 
 --
 -- Índices para tablas volcadas
@@ -403,7 +419,7 @@ ALTER TABLE `django_migrations`
 -- AUTO_INCREMENT de la tabla `platos`
 --
 ALTER TABLE `platos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

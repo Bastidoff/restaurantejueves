@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from web.formularios.formularioPlatos import FormularioPlatos
 from web.formularios.formularioEmpleados import FormularioEmpleados
 from web.formularios.formularioEdicionPlatos import FormularioEdicionPlatos
+from web.formularios.formularioEdicionEmpleados import FormularioEdicionEmpleados
 
 from web.models import Platos
 from web.models import Empleados
@@ -40,12 +41,10 @@ def EditarPlato(request,id):
             
             except Exception as error:
                 print("error", error)
-            
-            
-            
+
     return redirect('menu')
             
-            
+   
 def VistaPlatos(request):
 
     formulario=FormularioPlatos()
@@ -114,3 +113,27 @@ def VistaEmpleados(request):
                 print("error: ", error)
     return render(request,'empleados.html',datosParaTemplate)
 
+def ListaEmpleados(request):
+    empleadosConsultados=Empleados.objects.all()
+    formulario=FormularioEdicionEmpleados()
+        
+    diccionarioEnvio={
+        'empleados':empleadosConsultados,
+        'formulario':formulario
+    }
+    return render(request, 'listaEmpleados.html',diccionarioEnvio)
+
+
+def EditarEmpleado(request,id):
+    if request.method == 'POST':
+        datosDelFormulario=FormularioEdicionEmpleados(request.POST)
+        if datosDelFormulario.is_valid():
+            datosEmpleado=datosDelFormulario.cleaned_data
+            try:
+                Empleados.objects.filter(pk=id).update(telefono=datosEmpleado["telefono"])
+                print("ÉXITO GUARDANDO DATOS")
+            
+            except Exception as error:
+                print("error", error)
+
+    return redirect('listaEmpleados')

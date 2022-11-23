@@ -36,9 +36,11 @@
                         <h1 classs="fw-bold my-3 animate__animated animate__fadeInDown">REGISTRO DE EMPLEADOS</h1>
                         {{formularioEmpleados}}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-outline-success">Registrar</button>
-                        <br><br>
+                        <button type="submit" class="btn btn-outline-success">Registrar</button>                        
+                            <a href="{% url 'listaEmpleados' %}" class="btn btn-outline-dark">Ver Empleados</a>
+                        <br><br>                        
                     </form>
+                    
                 </div>
             </div>
         </div>

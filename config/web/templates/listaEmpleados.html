@@ -19,17 +19,17 @@
     <main>
         <div class="container">
             <div class="row row-cols-1 row-cols-md-3 g-3">
-                {% for plato in platos %}
+                {% for empleado in empleados %}
                     <div class="col">
                         <div class="card h-100 shadow">
-                            <img src={{plato.foto}} alt="" class="img-fluid w-100">
-                            <h4>{{plato.nombre}}</h4>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{plato.id}}">
+                            <img src={{empleado.foto}} alt="" class="img-fluid w-100">
+                            <h4>{{empleado.nombres}}</h4>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample{{empleado.id}}">
                                 <i class="bi bi-pencil-square"></i>
                               </button>
-                              <div class="collapse" id="collapseExample{{plato.id}}">
+                              <div class="collapse" id="collapseExample{{empleado.id}}">
                                 <div class="card card-body">
-                                    <form action="{% url 'editarPlato' id=plato.id %}" method="POST">
+                                    <form action="{% url 'editarEmpleado' id=empleado.id %}" method="POST">
                                         {{formulario}}
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-primary">Editar</button>

@@ -16,15 +16,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from web.views import Home,VistaPlatos,VistaEmpleados,MenuPlatos,EditarPlato
+from web.views import Home,VistaPlatos,VistaEmpleados,MenuPlatos,EditarPlato, ListaEmpleados, EditarEmpleado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', Home, name="home"),
-    path('platos/', VistaPlatos, name="platos"),
-    path('empleados/', VistaEmpleados, name="empleados"),
+    path('platos/', VistaPlatos, name="platos"),    
     path('menu/', MenuPlatos, name="menu"),
-    path('editarplato/<int:id>', EditarPlato, name="editarPlato")
+    path('editarplato/<int:id>', EditarPlato, name="editarPlato"),
+    path('empleados/', VistaEmpleados, name="empleados"),
+    path('listaempleados/', ListaEmpleados, name="listaEmpleados"),
+    path('editarempleado/<int:id>', EditarEmpleado, name="editarEmpleado"),
     #personal
 ]
